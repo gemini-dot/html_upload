@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nghệ An 40 Năm Trước (1986) | Gian Khó & Kiên Cường</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══ DESIGN SYSTEM (Same as dashboard) ═══ */
+      :root {
+        --bg: #f5f5f3;
+        --surface: #ffffff;
+        --border: #e0e0de;
+        --border-dark: #c0c0be;
+        --ink: #0a0a0a;
+        --ink-2: #333332;
+        --ink-3: #666664;
+        --ink-4: #999997;
+        --transition: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+      }
+
+      /* ═══ HEADER ═══ */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .logo-icon {
+        font-size: 24px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: all var(--transition);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink-2);
+      }
+
+      .btn-ghost:hover {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      /* ═══ HERO ═══ */
+      .hero {
+        padding: 80px 40px;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-tag {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        margin-bottom: 16px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .hero-title {
+        font-size: 56px;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+        color: var(--ink-3);
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+        margin-bottom: 24px;
+      }
+
+      .hero-year {
+        font-size: 72px;
+        font-weight: 900;
+        font-family: "DM Mono", monospace;
+        color: var(--ink);
+        opacity: 0.1;
+        letter-spacing: -0.05em;
+      }
+
+      /* ═══ SECTION ═══ */
+      .section {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+        padding: 0 40px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .section-number {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--ink);
+        color: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 800;
+        font-family: "DM Mono", monospace;
+        flex-shrink: 0;
+      }
+
+      .section-title-wrap {
+        flex: 1;
+      }
+
+      .section-tag {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        margin-bottom: 4px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .section-title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      .section-description {
+        font-size: 16px;
+        color: var(--ink-3);
+        line-height: 1.7;
+        margin-bottom: 32px;
+        max-width: 800px;
+      }
+
+      /* ═══ CARD ═══ */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 16px;
+        transition: all var(--transition);
+      }
+
+      .card:hover {
+        border-color: var(--border-dark);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+      }
+
+      .card-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--ink-2);
+        stroke-width: 2;
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+
+      .card-text {
+        font-size: 14px;
+        color: var(--ink-3);
+        line-height: 1.6;
+      }
+
+      /* ═══ IMAGE PLACEHOLDER ═══ */
+      .image-box {
+        background: var(--surface);
+        border: 2px dashed var(--border-dark);
+        border-radius: 12px;
+        aspect-ratio: 16/9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-box-icon {
+        font-size: 48px;
+        opacity: 0.3;
+      }
+
+      .image-box-text {
+        font-size: 13px;
+        color: var(--ink-4);
+        font-family: "DM Mono", monospace;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .image-box-hint {
+        font-size: 11px;
+        color: var(--ink-4);
+        background: var(--bg);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-family: "DM Mono", monospace;
+      }
+
+      /* Hover effect */
+      .image-box:hover {
+        border-color: var(--ink-3);
+        background: var(--bg);
+      }
+
+      /* ═══ QUOTE ═══ */
+      .quote-section {
+        background: var(--ink);
+        color: var(--surface);
+        padding: 60px 40px;
+        margin: 80px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quote-section::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 180px;
+        opacity: 0.05;
+        font-family: "Instrument Serif", serif;
+        line-height: 1;
+      }
+
+      .quote-text {
+        font-size: 24px;
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+        max-width: 800px;
+        margin: 0 auto 20px;
+        position: relative;
+        z-index: 1;
+        line-height: 1.6;
+      }
+
+      .quote-author {
+        font-size: 14px;
+        font-family: "DM Mono", monospace;
+        opacity: 0.7;
+      }
+
+      /* ═══ REALITY SECTION ═══ */
+      .reality-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 40px;
+        margin: 80px auto;
+        max-width: 1200px;
+      }
+
+      .reality-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .reality-tag {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #c03030;
+        margin-bottom: 12px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .reality-title {
+        font-size: 40px;
+        font-weight: 900;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .reality-subtitle {
+        font-size: 16px;
+        color: var(--ink-3);
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+      }
+
+      .reality-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+
+      .reality-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px;
+        transition: all var(--transition);
+      }
+
+      .reality-card:hover {
+        border-color: #c03030;
+        box-shadow: 0 4px 16px rgba(192, 48, 48, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .reality-card-icon {
+        font-size: 36px;
+        margin-bottom: 16px;
+      }
+
+      .reality-card-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.3;
+      }
+
+      .reality-card-text {
+        font-size: 14px;
+        color: var(--ink-3);
+        line-height: 1.7;
+      }
+
+      /* ═══ FOOTER ═══ */
+      .footer {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 60px 40px 40px;
+        text-align: center;
+      }
+
+      .footer-title {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .footer-text {
+        font-size: 15px;
+        color: var(--ink-3);
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto 32px;
+      }
+
+      .footer-divider {
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border-dark),
+          transparent
+        );
+        margin: 32px auto;
+      }
+
+      .footer-credits {
+        font-size: 12px;
+        font-family: "DM Mono", monospace;
+        color: var(--ink-4);
+      }
+
+      /* ═══ RESPONSIVE ═══ */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 60px 24px;
+        }
+
+        .hero-title {
+          font-size: 40px;
+        }
+
+        .hero-year {
+          font-size: 56px;
+        }
+
+        .section {
+          padding: 0 24px;
+          margin-bottom: 40px;
+        }
+
+        .section-title {
+          font-size: 24px;
+        }
+
+        .quote-text {
+          font-size: 20px;
+        }
+
+        .reality-section {
+          padding: 32px 24px;
+          margin: 60px 24px;
+        }
+
+        .reality-title {
+          font-size: 32px;
+        }
+
+        .reality-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ═══ SCROLL ANIMATIONS ═══ */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .section.visible .card:nth-child(1) {
+        animation: slideInLeft 0.6s ease-out 0.1s backwards;
+      }
+
+      .section.visible .card:nth-child(2) {
+        animation: slideInLeft 0.6s ease-out 0.2s backwards;
+      }
+
+      .section.visible .card:nth-child(3) {
+        animation: slideInLeft 0.6s ease-out 0.3s backwards;
+      }
+
+      .section.visible .card:nth-child(4) {
+        animation: slideInLeft 0.6s ease-out 0.4s backwards;
+      }
+
+      .section.visible .card:nth-child(5) {
+        animation: slideInLeft 0.6s ease-out 0.5s backwards;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🏛️</span>
+        Nghệ An <span style="opacity: 0.4; font-style: italic">1986</span>
+      </div>
+      <button class="btn btn-ghost" onclick="window.history.back()">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Quay lại
+      </button>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-tag">Hồi ức thời gian</div>
+      <h1 class="hero-title">Nghệ An 40 Năm Trước</h1>
+      <p class="hero-subtitle">Gian Khó & Kiên Cường</p>
+    </div>
+
+    <!-- SLIDE 1: CONTEXT -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Bối cảnh lịch sử</div>
+          <h2 class="section-title">Cuối Thời Bao Cấp, Bắt Đầu Đổi Mới</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Giai đoạn 1986 đánh dấu bước ngoặt lịch sử với Đại hội Đảng lần thứ VI -
+        khởi đầu Đổi Mới. Nghệ An lúc này thuộc tỉnh Nghệ Tĩnh (nhập chung với
+        Hà Tĩnh từ 1976-1991).
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772533789/my_project/users/samvasang1192011_gmail_com/files_ge6j58.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Tỉnh Nghệ Tĩnh</div>
+            <div class="card-text">
+              Nghệ An và Hà Tĩnh nhập chung thành tỉnh Nghệ Tĩnh (1976-1991).
+              Thời kỳ này đánh dấu nhiều khó khăn về hành chính và phát triển
+              kinh tế.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Kinh tế nông nghiệp</div>
+            <div class="card-text">
+              Chủ yếu làm ruộng, sản xuất bằng tay, năng suất thấp. Hợp tác xã
+              là hình thức tổ chức sản xuất phổ biến, phân phối bình quân.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Gió Lào khắc nghiệt</div>
+            <div class="card-text">
+              Gió Lào bỏng rát, khô hạn nghiêm trọng từ tháng 4-8. Thiên tai, lũ
+              lụt thường xuyên. Thiên nhiên khắc nghiệt tạo nên tính cách con
+              người kiên cường.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: TRANSPORT -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Phương tiện đi lại</div>
+          <h2 class="section-title">Đi Bộ & Xe Đạp</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Trong khi thế giới đã có ô tô, xe máy phổ biến, Nghệ An vẫn dựa vào đôi
+        chân và chiếc xe đạp cũ kỹ.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772533951/my_project/users/samvasang1192011_gmail_com/files_deto88.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Đi bộ 5-10km đến trường</div>
+            <div class="card-text">
+              Học sinh mỗi ngày băng đồng, lội suối, chân trần hoặc dép rách.
+              Thức dậy từ 5h sáng, đi bộ 1-2 tiếng mới đến lớp. Về nhà phải phụ
+              giúp gia đình làm ruộng, chăn trâu.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Xe đạp Thống Nhất, Phượng Hoàng</div>
+            <div class="card-text">
+              Tài sản lớn nhất của gia đình, giá bằng vài tháng lương. Thường
+              xuyên tuột xích, thủng lốp phải nhét rơm/cỏ khô vào đi tạm. Một
+              chiếc xe đạp phục vụ cả gia đình 3-4 thế hệ.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Xe máy: Xa xỉ phẩm</div>
+            <div class="card-text">
+              Simson, Honda Cub 50 chỉ nhà cực giàu hoặc cán bộ đi nước ngoài về
+              mới có. Một chiếc xe máy đắt bằng cả năm lương, là niềm tự hào của
+              cả xóm.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+              <path d="M3.6 9h16.8" />
+              <path d="M3.6 15h16.8" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Đường đất đỏ</div>
+            <div class="card-text">
+              Bụi mù mịt trời khi nắng, cả người đỏ ửng. Mưa thì lầy lội, xe
+              kẹt, phải xuống đẩy. Chưa có nhựa, bê tông - đường làng chỉ là đất
+              đỏ dày cộm, đá lởm chởm.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: HOME LIFE -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Đời sống gia đình</div>
+          <h2 class="section-title">Không Điện, Không Nước Máy</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Cuộc sống đơn sơ, gần gũi thiên nhiên nhưng đầy gian khó. Mọi thứ đều
+        làm bằng tay, từ nấu ăn đến giặt giũ.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534131/my_project/users/samvasang1192011_gmail_com/files_bt3djh.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8" />
+              <path d="M12 17v4" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Thiết bị điện: Gần như bằng 0</div>
+            <div class="card-text">
+              Không tivi màu, không tủ lạnh, không máy giặt, không internet.
+              "Sang chảnh" lắm có đài Radio cassette chạy pin để nghe tin tức,
+              nghe nhạc cách mạng. Pin đắt, phải tiết kiệm từng giờ.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M12 12c-6 0-6-4-6-6s0-6 6-6 6 4 6 6-0 6-6 6zm0 0c2 3 2 9 0 12m0-12c-2 3-2 9 0 12"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Bếp kiềng 3 chân</div>
+            <div class="card-text">
+              Đun bằng rơm, rạ, củi khô, lá cây. Tro bụi bay mù mịt, cay mắt, ho
+              khan. Cơm độn khoai, độn sắn vì gạo thiếu. Phải ăn kèm khoai sắn
+              cho no bụng, gạo để dành cho người lớn làm ruộng.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M9 2v2m6-2v2M9 16v6m6-6v6M3 9h3m15 0h3M3 15h3m15 0h3M9 9h1v6H9zm6 0h1v6h-1z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Đèn dầu hỏa (đèn Hoa Kỳ)</div>
+            <div class="card-text">
+              Ánh sáng tù mù, vàng nhạt. Tối đến cả nhà quây quần bên ngọn đèn
+              nhỏ. Đó là khoảnh khắc quý giá: kể chuyện, học bài, sửa lưới đánh
+              cá. Dầu đắt, phải tắt sớm tiết kiệm.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <div class="quote-section">
+      <p class="quote-text">
+        Tối đến, cả nhà quây quần bên ngọn đèn dầu nhỏ. Đó là khoảnh khắc đẹp
+        nhất trong ngày, dù ánh sáng mờ nhạt, nhưng tình thân đong đầy.
+      </p>
+      <div class="quote-author">— Hồi ức một thời</div>
+    </div>
+
+    <!-- SLIDE 4: COMMUNITY -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Dịch vụ cộng đồng</div>
+          <h2 class="section-title">Loa Phường & Giếng Khơi</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Không có điện lưới, nước máy, internet. Thông tin truyền qua loa phường,
+        nước lấy từ giếng khơi.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534248/my_project/users/samvasang1192011_gmail_com/files_atku6s.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Điện: Không có hoặc chập chờn</div>
+            <div class="card-text">
+              Vùng quê hoàn toàn tối đen về đêm, chỉ có ánh trăng sao. Thành phố
+              Vinh có điện nhưng cắt luân phiên liên tục, chiều 2 tiếng, tối 3
+              tiếng. Điện về là cả xóm ăn mừng.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Nước: Giếng khơi & nước mưa</div>
+            <div class="card-text">
+              Không nước máy. Đào giếng sâu 10-15m để lấy nước hoặc hứng nước
+              mưa từ mái nhà vào vại đất. Tắm rửa ra sông, suối. Giặt giũ ở bờ
+              ao, bờ sông. Mùa khô phải xếp hàng lấy nước từ sáng sớm.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Loa phường: "Mạng xã hội" thời đó</div>
+            <div class="card-text">
+              Sáng sớm 6h và chiều 5h loa phát tin tức cho cả làng nghe. Thông
+              báo họp, tin tức quốc tế, khen thưởng, phê bình. Loa là nguồn
+              thông tin duy nhất, ai cũng phải chú ý lắng nghe.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
+              <polyline points="17 2 12 7 7 2" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Phim bãi & kể chuyện</div>
+            <div class="card-text">
+              Sân đình, sân hợp tác xã chiếu phim ngoài trời vài tháng/lần. Cả
+              làng đổ xô đi xem, mang theo ghế, chiếu ngồi. Phim thường là phim
+              chiến tranh, phim Liên Xô. Đó là lễ hội của cả vùng.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: EDUCATION -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Học tập & Trò chơi</div>
+          <h2 class="section-title">Sách Cũ, Bút Chấm, Bi Đất</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Học tập trong điều kiện thiếu thốn nhưng đam mê. Trò chơi đơn giản nhưng
+        vui vẻ, trong sáng.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534346/my_project/users/samvasang1192011_gmail_com/files_ushac6.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Sách giáo khoa truyền tay</div>
+            <div class="card-text">
+              Cũ nát, viết chằng chịt, anh chị dùng xong truyền xuống em út. Mực
+              tím viết bằng bút chấm, giấy đen xỉn màu vì ẩm mốc. Một quyển sách
+              phải dùng 5-10 năm, vá vá lại vá để tiếp tục học.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="7" width="18" height="13" rx="2" ry="2" />
+              <polyline points="8 3 12 7 16 3" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Túi vải dù, bao tải dứa</div>
+            <div class="card-text">
+              Tự may hoặc mẹ may từ vải dù cũ, bao tải dứa. Không có cặp da như
+              bây giờ. Túi rách vá lại, dùng đến khi không vá được nữa mới thay.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Trò chơi dân gian</div>
+            <div class="card-text">
+              Bắn bi đất, nhảy dây chun, chơi chuyền, trốn tìm, đánh đáo, chơi
+              cá ngựa... Không có game online, điện thoại, máy tính. Trò chơi
+              đơn giản nhưng vui vẻ, tạo nên tuổi thơ đáng nhớ.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REALITY SECTION -->
+    <section class="reality-section" data-section>
+      <div class="reality-header">
+        <h2 class="reality-title">Nhưng!</h2>
+        <p class="reality-subtitle">Góc nhìn thực tế về cuộc sống lúc đó</p>
+      </div>
+
+      <div class="reality-grid">
+        <div class="reality-card">
+          <div class="reality-card-icon">🚸</div>
+          <h3 class="reality-card-title">Không phải ai cũng được đi học</h3>
+          <p class="reality-card-text">
+            Nhiều bạn cùng tuổi (lớp 9) đã phải bỏ học để chăn trâu, cắt cỏ, làm
+            ruộng phụ giúp gia đình vì quá đói. Tỷ lệ học sinh bỏ học giữa chừng
+            rất cao, đặc biệt là nữ sinh. Đi học là đặc quyền, không phải quyền
+            của tất cả mọi người.
+          </p>
+        </div>
+
+        <div class="reality-card">
+          <div class="reality-card-icon">🦠</div>
+          <h3 class="reality-card-title">Vệ sinh kém, bệnh tật nhiều</h3>
+          <p class="reality-card-text">
+            Không có nhà vệ sinh tự hoại sạch sẽ như bây giờ. Bệnh giun sán, ghẻ
+            lở, tiêu chảy, sốt rét rất phổ biến do thiếu nước sạch và điều kiện
+            vệ sinh kém. Y tế cơ sở yếu, thuốc men khan hiếm. Chữa bệnh chủ yếu
+            bằng thuốc nam, lá cây.
+          </p>
+        </div>
+
+        <div class="reality-card">
+          <div class="reality-card-icon">🍚</div>
+          <h3 class="reality-card-title">Cái đói: Nỗi ám ảnh thường trực</h3>
+          <p class="reality-card-text">
+            Bữa cơm có thịt là xa xỉ, chỉ có vào Tết hoặc giỗ tổ. Cơm độn khoai,
+            sắn là chuyện thường ngày. Nhiều gia đình đói ăn kéo dài, thiếu đói
+            thường xuyên. Trẻ em suy dinh dưỡng, thấp còi, còi cọc là cảnh tượng
+            phổ biến.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <h3 class="footer-title">Nghệ An Hôm Nay</h3>
+      <p class="footer-text">
+        Từ những ngày tháng gian khó, Nghệ An đã vươn lên mạnh mẽ. Đường sá,
+        điện nước, internet, bệnh viện, trường học... tất cả đã thay đổi hoàn
+        toàn. Nhưng tinh thần kiên cường, tình nghĩa gia đình, và ký ức về quá
+        khứ vẫn còn mãi trong mỗi người con Nghệ.
+      </p>
+      <div class="footer-divider"></div>
+      <p class="footer-credits">
+        Copyright by S-N-D | 2026<br />
+        <strong>Nguồn:</strong> Sử liệu Nghệ An, Hồi ức người dân, Tư liệu lịch
+        sử Việt Nam 1976-1991
+      </p>
+    </footer>
+
+    <script>
+      // ═══ SCROLL REVEAL ANIMATION ═══
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll("[data-section]").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
