@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nghệ An 40 Năm Trước (1986) | Gian Khó & Kiên Cường</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══ DESIGN SYSTEM (Same as dashboard) ═══ */
+      :root {
+        --bg: #f5f5f3;
+        --surface: #ffffff;
+        --border: #e0e0de;
+        --border-dark: #c0c0be;
+        --ink: #0a0a0a;
+        --ink-2: #333332;
+        --ink-3: #666664;
+        --ink-4: #999997;
+        --transition: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+      }
+
+      /* ═══ HEADER ═══ */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .logo-icon {
+        font-size: 24px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: all var(--transition);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink-2);
+      }
+
+      .btn-ghost:hover {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      /* ═══ HERO ═══ */
+      .hero {
+        padding: 80px 40px;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-tag {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        margin-bottom: 16px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .hero-title {
+        font-size: 56px;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+        color: var(--ink-3);
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+        margin-bottom: 24px;
+      }
+
+      .hero-year {
+        font-size: 72px;
+        font-weight: 900;
+        font-family: "DM Mono", monospace;
+        color: var(--ink);
+        opacity: 0.1;
+        letter-spacing: -0.05em;
+      }
+
+      /* ═══ SECTION ═══ */
+      .section {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+        padding: 0 40px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .section-number {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--ink);
+        color: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 800;
+        font-family: "DM Mono", monospace;
+        flex-shrink: 0;
+      }
+
+      .section-title-wrap {
+        flex: 1;
+      }
+
+      .section-tag {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        margin-bottom: 4px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .section-title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      .section-description {
+        font-size: 16px;
+        color: var(--ink-3);
+        line-height: 1.7;
+        margin-bottom: 32px;
+        max-width: 800px;
+      }
+
+      /* ═══ CARD ═══ */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 16px;
+        transition: all var(--transition);
+      }
+
+      .card:hover {
+        border-color: var(--border-dark);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+      }
+
+      .card-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--ink-2);
+        stroke-width: 2;
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+
+      .card-text {
+        font-size: 14px;
+        color: var(--ink-3);
+        line-height: 1.6;
+      }
+
+      /* ═══ IMAGE PLACEHOLDER ═══ */
+      .image-box {
+        background: var(--surface);
+        border: 2px dashed var(--border-dark);
+        border-radius: 12px;
+        aspect-ratio: 16/9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-box-icon {
+        font-size: 48px;
+        opacity: 0.3;
+      }
+
+      .image-box-text {
+        font-size: 13px;
+        color: var(--ink-4);
+        font-family: "DM Mono", monospace;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .image-box-hint {
+        font-size: 11px;
+        color: var(--ink-4);
+        background: var(--bg);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-family: "DM Mono", monospace;
+      }
+
+      /* Hover effect */
+      .image-box:hover {
+        border-color: var(--ink-3);
+        background: var(--bg);
+      }
+
+      /* ═══ QUOTE ═══ */
+      .quote-section {
+        background: var(--ink);
+        color: var(--surface);
+        padding: 60px 40px;
+        margin: 80px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quote-section::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 180px;
+        opacity: 0.05;
+        font-family: "Instrument Serif", serif;
+        line-height: 1;
+      }
+
+      .quote-text {
+        font-size: 24px;
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+        max-width: 800px;
+        margin: 0 auto 20px;
+        position: relative;
+        z-index: 1;
+        line-height: 1.6;
+      }
+
+      .quote-author {
+        font-size: 14px;
+        font-family: "DM Mono", monospace;
+        opacity: 0.7;
+      }
+
+      /* ═══ REALITY SECTION ═══ */
+      .reality-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 40px;
+        margin: 80px auto;
+        max-width: 1200px;
+      }
+
+      .reality-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .reality-tag {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #c03030;
+        margin-bottom: 12px;
+        font-family: "DM Mono", monospace;
+      }
+
+      .reality-title {
+        font-size: 40px;
+        font-weight: 900;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .reality-subtitle {
+        font-size: 16px;
+        color: var(--ink-3);
+        font-style: italic;
+        font-family: "Instrument Serif", serif;
+      }
+
+      .reality-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
+
+      .reality-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px;
+        transition: all var(--transition);
+      }
+
+      .reality-card:hover {
+        border-color: #c03030;
+        box-shadow: 0 4px 16px rgba(192, 48, 48, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .reality-card-icon {
+        font-size: 36px;
+        margin-bottom: 16px;
+      }
+
+      .reality-card-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.3;
+      }
+
+      .reality-card-text {
+        font-size: 14px;
+        color: var(--ink-3);
+        line-height: 1.7;
+      }
+
+      /* ═══ FOOTER ═══ */
+      .footer {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 60px 40px 40px;
+        text-align: center;
+      }
+
+      .footer-title {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .footer-text {
+        font-size: 15px;
+        color: var(--ink-3);
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto 32px;
+      }
+
+      .footer-divider {
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border-dark),
+          transparent
+        );
+        margin: 32px auto;
+      }
+
+      .footer-credits {
+        font-size: 12px;
+        font-family: "DM Mono", monospace;
+        color: var(--ink-4);
+      }
+
+      /* ═══ RESPONSIVE ═══ */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 60px 24px;
+        }
+
+        .hero-title {
+          font-size: 40px;
+        }
+
+        .hero-year {
+          font-size: 56px;
+        }
+
+        .section {
+          padding: 0 24px;
+          margin-bottom: 40px;
+        }
+
+        .section-title {
+          font-size: 24px;
+        }
+
+        .quote-text {
+          font-size: 20px;
+        }
+
+        .reality-section {
+          padding: 32px 24px;
+          margin: 60px 24px;
+        }
+
+        .reality-title {
+          font-size: 32px;
+        }
+
+        .reality-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ═══ SCROLL ANIMATIONS ═══ */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .section.visible .card:nth-child(1) {
+        animation: slideInLeft 0.6s ease-out 0.1s backwards;
+      }
+
+      .section.visible .card:nth-child(2) {
+        animation: slideInLeft 0.6s ease-out 0.2s backwards;
+      }
+
+      .section.visible .card:nth-child(3) {
+        animation: slideInLeft 0.6s ease-out 0.3s backwards;
+      }
+
+      .section.visible .card:nth-child(4) {
+        animation: slideInLeft 0.6s ease-out 0.4s backwards;
+      }
+
+      .section.visible .card:nth-child(5) {
+        animation: slideInLeft 0.6s ease-out 0.5s backwards;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🏛️</span>
+        Nghe An <span style="opacity: 0.4; font-style: italic">1986</span>
+      </div>
+      <button class="btn btn-ghost" onclick="window.history.back()">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Go back
+      </button>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-tag">Echoes of the Past</div>
+      <h1 class="hero-title">Nghe An 40 Years Ago</h1>
+      <p class="hero-subtitle">Hardship & Resilience</p>
+    </div>
+
+    <!-- SLIDE 1: CONTEXT -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Historical Context</div>
+          <h2 class="section-title">
+            End of the Subsidy Period, Dawn of Renovation
+          </h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        The year 1986 marked a historical turning point with the 6th National
+        Party Congress - the beginning of "Đổi Mới" (Renovation). Nghe An at
+        this time belonged to Nghe Tinh province (merged with Ha Tinh from 1976
+        to 1991).
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772533789/my_project/users/samvasang1192011_gmail_com/files_ge6j58.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Nghe Tinh Province</div>
+            <div class="card-text">
+              Nghe An and Ha Tinh merged into Nghe Tinh province (1976-1991).
+              This period marked many administrative and economic development
+              difficulties.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Agricultural Economy</div>
+            <div class="card-text">
+              Mainly farming, manual labor, low productivity. Cooperatives were
+              the common form of production organization, with equal
+              distribution.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Harsh Foehn Wind (Lao Wind)</div>
+            <div class="card-text">
+              Scorching Foehn wind, severe drought from April to August.
+              Frequent natural disasters and floods. The harsh nature forged the
+              resilient character of the people.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: TRANSPORT -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Transportation</div>
+          <h2 class="section-title">Walking & Bicycles</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        While the world already had popular cars and motorbikes, Nghe An still
+        relied on bare feet and rusty bicycles.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772533951/my_project/users/samvasang1192011_gmail_com/files_deto88.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Walking 5-10km to school</div>
+            <div class="card-text">
+              Students crossed fields and waded through streams every day,
+              barefoot or in torn sandals. Waking up at 5 AM, walking 1-2 hours
+              just to get to class. After returning home, they had to help their
+              families farm and herd buffaloes.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Thong Nhat & Phuong Hoang Bicycles</div>
+            <div class="card-text">
+              The family's biggest asset, costing several months' salary. The
+              chain often slipped, and flat tires had to be temporarily stuffed
+              with straw/dry grass. One bicycle served a whole family of 3-4
+              generations.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+              <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Motorbikes: Luxury items</div>
+            <div class="card-text">
+              Simson and Honda Cub 50 were only owned by the extremely wealthy
+              or officials returning from abroad. A motorbike cost a year's
+              salary and was the pride of the whole neighborhood.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+              <path d="M3.6 9h16.8" />
+              <path d="M3.6 15h16.8" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Red dirt roads</div>
+            <div class="card-text">
+              Blinding dust on sunny days, turning people red. On rainy days, it
+              was muddy; vehicles got stuck and had to be pushed. No asphalt or
+              concrete yet - village roads were just thick red dirt and jagged
+              rocks.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: HOME LIFE -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Family Life</div>
+          <h2 class="section-title">No Electricity, No Tap Water</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        A simple life, close to nature but full of hardships. Everything was
+        done by hand, from cooking to washing.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534131/my_project/users/samvasang1192011_gmail_com/files_bt3djh.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8" />
+              <path d="M12 17v4" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Electrical Appliances: Almost Zero</div>
+            <div class="card-text">
+              No color TVs, no refrigerators, no washing machines, no internet.
+              Only the "fancy" families had battery-powered radio cassettes to
+              listen to news and revolutionary music. Batteries were expensive
+              and had to be saved by the hour.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M12 12c-6 0-6-4-6-6s0-6 6-6 6 4 6 6-0 6-6 6zm0 0c2 3 2 9 0 12m0-12c-2 3-2 9 0 12"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Three-legged tripod stove</div>
+            <div class="card-text">
+              Cooking with straw, stubble, dry firewood, and leaves. Flying ash
+              caused stinging eyes and dry coughs. Rice was mixed with sweet
+              potatoes and cassava because of rice shortages. Had to eat sweet
+              potatoes and cassava to get full; rice was saved for adults doing
+              farm work.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M9 2v2m6-2v2M9 16v6m6-6v6M3 9h3m15 0h3M3 15h3m15 0h3M9 9h1v6H9zm6 0h1v6h-1z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Kerosene lamps (Hoa Ky lamps)</div>
+            <div class="card-text">
+              Dim, pale yellow light. At night, the whole family gathered around
+              the small lamp. Those were precious moments: telling stories,
+              studying, repairing fishing nets. Oil was expensive, so lamps had
+              to be turned off early to save it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <div class="quote-section">
+      <p class="quote-text">
+        At night, the whole family gathered around the small kerosene lamp. That
+        was the most beautiful moment of the day; though the light was dim,
+        family love was overflowing.
+      </p>
+      <div class="quote-author">- Memories of a bygone era</div>
+    </div>
+
+    <!-- SLIDE 4: COMMUNITY -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Community Services</div>
+          <h2 class="section-title">Ward Loudspeakers & Open Wells</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        No power grid, tap water, or internet. Information was transmitted
+        through ward loudspeakers, and water was drawn from open wells.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534248/my_project/users/samvasang1192011_gmail_com/files_atku6s.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Electricity: None or flickering</div>
+            <div class="card-text">
+              Rural areas were completely pitch black at night, with only
+              moonlight and starlight. Vinh city had electricity but with
+              constant rolling blackouts: 2 hours in the afternoon, 3 hours at
+              night. When the power came back on, the whole neighborhood
+              celebrated.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Water: Open wells & rainwater</div>
+            <div class="card-text">
+              No tap water. Digging wells 10-15m deep or catching rainwater from
+              the roof into earthen jars. Bathing in rivers and streams. Washing
+              clothes by the pond or riverbank. During the dry season, people
+              had to queue for water from early morning.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">
+              Ward loudspeakers: The "social network" of that time
+            </div>
+            <div class="card-text">
+              At 6 AM and 5 PM, loudspeakers broadcast news for the whole
+              village. Meeting announcements, international news, praises, and
+              criticisms. Loudspeakers were the only source of information;
+              everyone had to listen carefully.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
+              <polyline points="17 2 12 7 7 2" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Outdoor movies & storytelling</div>
+            <div class="card-text">
+              The communal house courtyard or cooperative yard screened outdoor
+              movies every few months. The whole village flocked to watch,
+              bringing chairs and mats. The movies were usually war films or
+              Soviet films. It was a festival for the whole region.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: EDUCATION -->
+    <section class="section" data-section>
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <div class="section-title-wrap">
+          <div class="section-tag">Education & Games</div>
+          <h2 class="section-title">Old Books, Dip Pens, Clay Marbles</h2>
+        </div>
+      </div>
+
+      <p class="section-description">
+        Studying in deprived conditions but with passion. Games were simple but
+        joyful and innocent.
+      </p>
+
+      <!-- Image Placeholder -->
+      <div class="image-box">
+        <img
+          src="https://res.cloudinary.com/dshgtuy8f/image/upload/v1772534346/my_project/users/samvasang1192011_gmail_com/files_ushac6.jpg"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+          "
+        />
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+              />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Hand-me-down textbooks</div>
+            <div class="card-text">
+              Tattered, scribbled all over; older siblings passed them down to
+              younger ones. Purple ink written with dip pens; paper turned dark
+              and dull due to mold. A book had to be used for 5-10 years,
+              patched over and over to continue studying.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="7" width="18" height="13" rx="2" ry="2" />
+              <polyline points="8 3 12 7 16 3" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Parachute cloth bags, woven sack bags</div>
+            <div class="card-text">
+              Self-sewn or sewn by mothers from old parachute cloth or woven
+              sacks. No leather backpacks like today. Torn bags were patched and
+              used until they couldn't be patched anymore.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <div class="card-title">Folk games</div>
+            <div class="card-text">
+              Shooting clay marbles, jumping rubber bands, playing jacks,
+              hide-and-seek, playing coin toss, seahorse chess... No online
+              games, phones, or computers. Simple but fun games that created a
+              memorable childhood.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REALITY SECTION -->
+    <section class="reality-section" data-section>
+      <div class="reality-header">
+        <h2 class="reality-title">BUT!</h2>
+        <p class="reality-subtitle">A realistic view of life back then</p>
+      </div>
+
+      <div class="reality-grid">
+        <div class="reality-card">
+          <div class="reality-card-icon">🚸</div>
+          <h3 class="reality-card-title">Not everyone got to go to school</h3>
+          <p class="reality-card-text">
+            Many kids the same age (9th grade) had to drop out to herd
+            buffaloes, cut grass, and farm to help their starving families. The
+            dropout rate was very high, especially among schoolgirls. Going to
+            school was a privilege, not a right for everyone.
+          </p>
+        </div>
+
+        <div class="reality-card">
+          <div class="reality-card-icon">🦠</div>
+          <h3 class="reality-card-title">Poor hygiene, many diseases</h3>
+          <p class="reality-card-text">
+            No clean flush toilets like today. Tapeworms, scabies, diarrhea, and
+            malaria were very common due to a lack of clean water and poor
+            sanitary conditions. Grassroots healthcare was weak, and medicine
+            was scarce. Illnesses were mainly treated with traditional herbal
+            medicine and leaves.
+          </p>
+        </div>
+
+        <div class="reality-card">
+          <div class="reality-card-icon">🍚</div>
+          <h3 class="reality-card-title">Hunger: A constant obsession</h3>
+          <p class="reality-card-text">
+            Having meat for a meal was a luxury, only for Tet (Lunar New Year)
+            or ancestors' death anniversaries. Rice mixed with sweet potatoes
+            and cassava was an everyday occurrence. Many families suffered from
+            prolonged starvation and frequent food shortages. Malnourished,
+            stunted, and emaciated children were a common sight.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <h3 class="footer-title">Nghe An Today</h3>
+      <p class="footer-text">
+        From those days of hardship, Nghe An has risen strongly. Roads,
+        electricity, water, internet, hospitals, schools... everything has
+        completely changed. But the resilient spirit, family bonds, and memories
+        of the past remain forever in every child of Nghe.
+      </p>
+      <div class="footer-divider"></div>
+      <p class="footer-credits">
+        &#169; Copyright prj-NgheAn40/nhom5day2-team. All rights reserved.<br />
+        nhom5day2-team: Van Sam(designer/Content Curator/Frontend
+        Developer/Tester), Thuy Nga(Content Researcher/Translator), Tran
+        Dan(leader/Presenter/Content Creator), Duc Toan(img/Iconographer)<br />
+        <strong>Sources:</strong>Historical records of Nghe An, residents'
+        memoirs, Vietnam historical documents 1976-1991.
+      </p>
+    </footer>
+
+    <script>
+      // ═══ SCROLL REVEAL ANIMATION ═══
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      document.querySelectorAll("[data-section]").forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+    <div
+      id="gesture-status"
+      style="
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 9999;
+        padding: 10px;
+        border-radius: 8px;
+        font-family: &quot;DM Mono&quot;, monospace;
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ccc;
+      "
+    >
+      Status: <span id="status-text">Waiting...</span>
+      <div
+        id="charge-bar"
+        style="
+          width: 0%;
+          height: 5px;
+          background: #0a0a0a;
+          margin-top: 5px;
+          transition: width 0.1s;
+        "
+      ></div>
+    </div>
+
+    <video id="input_video" style="display: none"></video>
+
+    <script>
+      const videoElement = document.getElementById("input_video");
+      const statusText = document.getElementById("status-text");
+      const chargeBar = document.getElementById("charge-bar");
+
+      let chargeLevel = 0;
+      let isReady = false;
+      let cooldown = false;
+
+      const sections = document.querySelectorAll("[data-section]");
+      let currentIdx = 0;
+
+      function triggerAction() {
+        if (cooldown) return;
+
+        currentIdx++;
+        if (currentIdx >= sections.length) currentIdx = sections.length - 1;
+
+        sections[currentIdx].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+        // Reset mọi thứ sau khi kích hoạt
+        isReady = false;
+        chargeLevel = 0;
+        chargeBar.style.width = "0%";
+        statusText.innerText = "Switched! :)";
+        statusText.style.color = "green";
+
+        cooldown = true;
+        setTimeout(() => {
+          cooldown = false;
+          statusText.innerText = "Waiting...";
+          statusText.style.color = "black";
+        }, 1500);
+      }
+
+      function onResults(results) {
+        if (
+          results.multiHandLandmarks &&
+          results.multiHandLandmarks.length > 0
+        ) {
+          const hand = results.multiHandLandmarks[0];
+
+          // Đếm số ngón tay đang xòe (ngón trỏ, giữa, áp út, út)
+          let openFingers = 0;
+          [8, 12, 16, 20].forEach((tip) => {
+            if (hand[tip].y < hand[tip - 2].y) openFingers++;
+          });
+
+          if (!isReady) {
+            if (openFingers >= 3) {
+              // Đang xòe tay để nạp
+              chargeLevel += 2; // Tăng tốc độ nạp
+              chargeBar.style.width = Math.min(chargeLevel, 100) + "%";
+              statusText.innerText = "Charging...";
+
+              if (chargeLevel >= 100) {
+                isReady = true;
+                statusText.innerText = "READY! (Make a fist to switch)";
+                statusText.style.color = "red";
+              }
+            } else {
+              chargeLevel = Math.max(0, chargeLevel - 5); // Giảm nhanh nếu thu tay lại
+              chargeBar.style.width = chargeLevel + "%";
+            }
+          } else {
+            // Đã READY, giờ kiểm tra xem có nắm tay (Fist) không
+            if (openFingers <= 1) {
+              triggerAction();
+            }
+          }
+        }
+      }
+
+      const hands = new Hands({
+        locateFile: (file) =>
+          `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+      });
+
+      hands.setOptions({
+        maxNumHands: 1,
+        modelComplexity: 1,
+        minDetectionConfidence: 0.7,
+      });
+      hands.onResults(onResults);
+
+      const camera = new Camera(videoElement, {
+        onFrame: async () => {
+          await hands.send({ image: videoElement });
+        },
+        width: 640,
+        height: 480,
+      });
+      camera.start();
+    </script>
+  </body>
+</html>
