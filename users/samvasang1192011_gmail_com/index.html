@@ -3,1638 +3,1974 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAULT — Upload Dashboard</title>
+    <title>VAULT Admin Dashboard | Quản trị hệ thống</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
-    />
-    <link
-      href="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/styles/upload/dashboard/style.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/styles/upload/dashboard/chuc_nang/share_model.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://res.cloudinary.com/dshgtuy8f/image/upload/v1771402917/main_logo_2_bkgj5f.png"
     />
     <style>
+      /* ═══ DESIGN SYSTEM ═══ */
+      :root {
+        --bg: #f5f5f3;
+        --surface: #ffffff;
+        --border: #e0e0de;
+        --border-dark: #c0c0be;
+        --ink: #0a0a0a;
+        --ink-2: #333332;
+        --ink-3: #666664;
+        --ink-4: #999997;
+        --success: #2ecc71;
+        --warning: #f39c12;
+        --error: #e74c3c;
+        --info: #3498db;
+        --transition: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        --sidebar-w: 280px;
+        --header-h: 70px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Manrope', sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ═══ GRID LAYOUT ═══ */
+      .admin-container {
+        display: grid;
+        grid-template-columns: var(--sidebar-w) 1fr;
+        grid-template-rows: var(--header-h) 1fr;
+        min-height: 100vh;
+      }
+
+      /* ═══ HEADER ═══ */
+      .admin-header {
+        grid-column: 1 / -1;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .logo {
+        font-family: 'Instrument Serif', serif;
+        font-size: 24px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--ink);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--surface);
+        font-size: 20px;
+      }
+
+      .admin-badge {
+        padding: 6px 14px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        color: #1a1a1a;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        font-family: 'DM Mono', monospace;
+        letter-spacing: 0.05em;
+        border: 2px solid #ffed4e;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        animation: goldGlow 3s ease-in-out infinite;
+      }
+
       @keyframes goldGlow {
         0%,
         100% {
-          filter: brightness(1) saturate(1);
-          box-shadow:
-            0 0 20px rgba(255, 215, 0, 0.5),
-            0 4px 12px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          filter: brightness(1);
         }
         50% {
-          filter: brightness(1.2) saturate(1.3);
-          box-shadow:
-            0 0 30px rgba(255, 215, 0, 0.7),
-            0 4px 12px rgba(0, 0, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          filter: brightness(1.15);
         }
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .header-search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        width: 300px;
+      }
+
+      .header-search svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--ink-4);
+      }
+
+      .header-search input {
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: 'DM Mono', monospace;
+        font-size: 13px;
+        color: var(--ink);
+        width: 100%;
+      }
+
+      .header-icon-btn {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .header-icon-btn:hover {
+        background: var(--bg);
+        border-color: var(--border-dark);
+      }
+
+      .header-icon-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke-width: 2;
+      }
+
+      .header-icon-btn .badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        background: var(--error);
+        color: var(--surface);
+        border-radius: 99px;
+        font-size: 10px;
+        font-weight: 700;
+        font-family: 'DM Mono', monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--surface);
+      }
+
+      .admin-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        color: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        cursor: pointer;
+        border: 2px solid #ffed4e;
+      }
+
+      /* ═══ SIDEBAR ═══ */
+      .admin-sidebar {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 24px 16px;
+        overflow-y: auto;
+        position: sticky;
+        top: var(--header-h);
+        height: calc(100vh - var(--header-h));
+      }
+
+      .sidebar-section {
+        margin-bottom: 32px;
+      }
+
+      .sidebar-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        padding: 0 16px 12px;
+        font-family: 'DM Mono', monospace;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        color: var(--ink-2);
+        position: relative;
+      }
+
+      .sidebar-item:hover {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .sidebar-item.active {
+        background: var(--ink);
+        color: var(--surface);
+      }
+
+      .sidebar-item.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60%;
+        background: var(--surface);
+        border-radius: 0 99px 99px 0;
+      }
+
+      .sidebar-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-icon svg {
+        width: 100%;
+        height: 100%;
+        stroke-width: 2;
+      }
+
+      .sidebar-text {
+        flex: 1;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .sidebar-badge {
+        padding: 2px 8px;
+        background: var(--error);
+        color: var(--surface);
+        border-radius: 99px;
+        font-size: 10px;
+        font-weight: 700;
+        font-family: 'DM Mono', monospace;
+      }
+
+      .sidebar-badge.info {
+        background: var(--info);
+      }
+
+      .sidebar-badge.success {
+        background: var(--success);
+      }
+
+      /* ═══ MAIN CONTENT ═══ */
+      .admin-main {
+        padding: 32px;
+        overflow-y: auto;
+        max-height: calc(100vh - var(--header-h));
+      }
+
+      .page-header {
+        margin-bottom: 32px;
+      }
+
+      .page-title {
+        font-size: 32px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+      }
+
+      .page-subtitle {
+        font-size: 15px;
+        color: var(--ink-3);
+      }
+
+      .page-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* ═══ STATS CARDS ═══ */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--ink) 0%, var(--ink-3) 100%);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .stat-card:hover {
+        border-color: var(--border-dark);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+
+      .stat-card:hover::before {
+        opacity: 1;
+      }
+
+      .stat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+      }
+
+      .stat-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 2;
+      }
+
+      .stat-trend {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: 'DM Mono', monospace;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .stat-trend.up {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .stat-trend.down {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .stat-value {
+        font-size: 36px;
+        font-weight: 900;
+        font-family: 'DM Mono', monospace;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        color: var(--ink-3);
+        font-weight: 600;
+      }
+
+      /* ═══ CONTENT CARD ═══ */
+      .content-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      /* ═══ BUTTONS ═══ */
+      .btn {
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+      }
+
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2;
+      }
+
+      .btn-primary {
+        background: var(--ink);
+        color: var(--surface);
+      }
+
+      .btn-primary:hover {
+        background: var(--ink-2);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink-2);
+        border: 1px solid var(--border);
+      }
+
+      .btn-ghost:hover {
+        background: var(--bg);
+        border-color: var(--border-dark);
+      }
+
+      .btn-success {
+        background: var(--success);
+        color: var(--surface);
+      }
+
+      .btn-warning {
+        background: var(--warning);
+        color: var(--surface);
+      }
+
+      .btn-danger {
+        background: var(--error);
+        color: var(--surface);
+      }
+
+      .btn-small {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      /* ═══ TABLE ═══ */
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      th {
+        padding: 14px 20px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-family: 'DM Mono', monospace;
+      }
+
+      td {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr {
+        transition: background 0.2s;
+      }
+
+      tbody tr:hover {
+        background: var(--bg);
+      }
+
+      .user-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .user-info {
+        min-width: 0;
+      }
+
+      .user-name {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .user-email {
+        font-size: 12px;
+        color: var(--ink-4);
+        font-family: 'DM Mono', monospace;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .badge {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        font-family: 'DM Mono', monospace;
+        display: inline-block;
+      }
+
+      .badge.success {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .badge.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .badge.danger {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .badge.info {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .badge.admin {
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        color: #1a1a1a;
+        border: 1px solid #ffed4e;
+      }
+
+      .table-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .action-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: transparent;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .action-btn:hover {
+        background: var(--bg);
+        border-color: var(--border-dark);
+      }
+
+      .action-btn.danger:hover {
+        background: var(--error);
+        border-color: var(--error);
+        color: var(--surface);
+      }
+
+      .action-btn svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2;
+      }
+
+      /* ═══ CHARTS ═══ */
+      .chart-container {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 24px;
+      }
+
+      .chart-placeholder {
+        width: 100%;
+        height: 300px;
+        background: linear-gradient(135deg, var(--bg) 0%, #e8e8e6 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-4);
+        font-family: 'DM Mono', monospace;
+        font-size: 14px;
+      }
+
+      /* ═══ FORMS ═══ */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--ink-2);
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--ink);
+        background: var(--surface);
+        transition: all 0.2s;
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--ink-3);
+        box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      /* ═══ SYSTEM MONITOR ═══ */
+      .monitor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 32px;
+      }
+
+      .monitor-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .monitor-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .monitor-title {
+        font-size: 15px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .monitor-value {
+        font-size: 32px;
+        font-weight: 900;
+        font-family: 'DM Mono', monospace;
+        margin-bottom: 8px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--bg);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--success) 0%,
+          var(--warning) 70%,
+          var(--error) 100%
+        );
+        border-radius: 99px;
+        transition: width 0.3s;
+      }
+
+      /* ═══ TOAST ═══ */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--ink);
+        color: var(--surface);
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s;
+        pointer-events: none;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ═══ RESPONSIVE ═══ */
+      @media (max-width: 1024px) {
+        .admin-container {
+          grid-template-columns: 1fr;
+        }
+
+        .admin-sidebar {
+          display: none;
+        }
+
+        .header-search {
+          width: 200px;
+        }
+      }
+      /* ═══ KHUNG THÔNG BÁO ═══ */
+      .notification-wrapper {
+        position: relative;
+      }
+
+      .noti-dropdown {
+        display: none; /* Mặc định là ẩn */
+        position: absolute;
+        top: 55px; /* Nằm dưới nút chuông */
+        right: 0;
+        width: 300px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        overflow: hidden;
+      }
+
+      .noti-dropdown.show {
+        display: block; /* Bật lên khi có class 'show' */
+      }
+
+      .noti-header {
+        padding: 12px 16px;
+        font-weight: 700;
+        font-size: 14px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg);
+      }
+
+      .noti-item {
+        padding: 16px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .noti-item:hover {
+        background: var(--bg);
+      }
+
+      .noti-time {
+        font-size: 11px;
+        color: var(--ink-4);
+        margin-top: 6px;
+        font-family: 'DM Mono', monospace;
       }
     </style>
   </head>
   <body>
-    <div class="app" id="app">
+    <div class="admin-container">
       <!-- HEADER -->
-      <header>
-        <div class="logo">MY <span>files</span></div>
-        <div class="header-center" id="searchWrap">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="flex-shrink: 0; opacity: 0.5"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Tìm kiếm file..."
-            autocomplete="off"
-            style="
-              border: none;
-              outline: none;
-              background: transparent;
-              font-family: 'DM Mono', monospace;
-              font-size: 13px;
-              color: var(--ink);
-              width: 100%;
-              caret-color: var(--ink);
-            "
-          />
-          <button
-            id="searchClear"
-            onclick="clearSearch()"
-            style="
-              display: none;
-              background: none;
-              border: none;
-              cursor: pointer;
-              padding: 0;
-              color: var(--ink-4);
-              flex-shrink: 0;
-              line-height: 0;
-            "
-          >
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
+      <header class="admin-header">
+        <div class="header-left">
+          <div class="logo">
+            <div class="logo-icon">⚡</div>
+            <span>VAULT Admin</span>
+          </div>
         </div>
-        <div class="header-actions">
-          <button
-            class="btn btn-ghost"
-            onclick="
-              window.location.href =
-                'https://www.vault-storage.me/frontend/view/upload/web_upload/index.html'
-            "
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
+
+        <div class="header-right">
+          <div class="header-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-            Upload
-          </button>
-          <div class="avatar-wrap">
-            <div class="avatar" id="avatarBtn" onclick="toggleAvatarMenu()">
-              ?
-            </div>
-            <div class="avatar-menu" id="avatarMenu">
-              <!-- Profile -->
-              <div class="am-profile">
-                <div class="am-avatar-big">?</div>
-                <div>
-                  <div class="am-name">Anonymous</div>
-                  <div class="am-email">
-                    <a
-                      href="/cdn-cgi/l/email-protection"
-                      class="__cf_email__"
-                      data-cfemail="80f4f5e1eec0f6e1f5ecf4aee9ef"
-                      >[email&#160;protected]</a
-                    >
-                  </div>
-                  <div class="am-badge-pro">
-                    <svg
-                      width="9"
-                      height="9"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                      />
-                    </svg>
-                    BASIC
-                  </div>
-                </div>
-              </div>
+            <input type="text" placeholder="Tìm kiếm..." />
+          </div>
 
-              <!-- Section 1: Account -->
-              <div class="am-section">
-                <div
-                  class="am-item"
-                  onclick="
-                    menuAction('profile');
-                    openSettings();
-                  "
-                >
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Hồ sơ cá nhân</div>
-                    <div class="am-item-sub">Chỉnh sửa thông tin tài khoản</div>
-                  </div>
-                </div>
-                <div
-                  class="am-item"
-                  onclick="
-                    menuAction('storage-plan');
-                    window.location.href =
-                      'https://www.vault-storage.me/frontend/view/buy_package/index.html';
-                  "
-                >
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <ellipse cx="12" cy="5" rx="9" ry="3" />
-                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Gói lưu trữ</div>
-                    <div class="am-item-sub" id="goi">10 GB — Basic plan</div>
-                  </div>
-                  <div class="am-item-right">Nâng cấp</div>
-                </div>
-                <div class="am-item" onclick="menuAction('billing')">
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                      <line x1="1" y1="10" x2="23" y2="10" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Thanh toán</div>
-                    <div class="am-item-sub">Quản lý hóa đơn & thẻ</div>
-                  </div>
-                </div>
-              </div>
+          <div class="notification-wrapper">
+            <!-- Nút chuông, thêm sự kiện onclick -->
+            <button
+              class="header-icon-btn"
+              onclick="toggleNotifications(event)"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <span class="badge" id="notiBadge">1</span>
+            </button>
 
-              <div class="am-divider"></div>
-
-              <!-- Section 2: Settings & Prefs -->
-              <div class="am-section">
-                <div
-                  class="am-item"
-                  onclick="
-                    menuAction('settings');
-                    openSettings();
-                  "
-                >
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="3" />
-                      <path
-                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Cài đặt</div>
-                    <div class="am-item-sub">Bảo mật, thông báo...</div>
-                  </div>
-                </div>
-                <div class="am-item" onclick="toggleNotif(this)">
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Thông báo</div>
-                  </div>
-                  <div class="am-toggle on" id="notifToggle"></div>
-                </div>
-                <div class="am-item" onclick="toggleDark(this)">
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Giao diện tối</div>
-                  </div>
-                  <div class="am-toggle" id="darkToggle"></div>
-                </div>
-              </div>
-
-              <div class="am-divider"></div>
-
-              <!-- Section 3: Help + Logout -->
-              <div class="am-section">
-                <div class="am-item" onclick="menuAction('help')">
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                      <line x1="12" y1="17" x2="12.01" y2="17" />
-                    </svg>
-                  </div>
-                  <div
-                    class="am-item-text"
-                    onclick="
-                      window.location.href =
-                        'https://www.facebook.com/profile.php?id=61588442257734'
-                    "
-                  >
-                    <div class="am-item-label">Trợ giúp & Hỗ trợ</div>
-                  </div>
-                </div>
-                <div class="am-item" onclick="menuAction('shortcut')">
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="2" y="7" width="20" height="14" rx="2" />
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text">
-                    <div class="am-item-label">Phím tắt</div>
-                  </div>
-                  <div class="am-item-right">⌘K</div>
-                </div>
-                <div
-                  class="am-item danger"
-                  onclick="(menuAction('logout'), toggleLogoutModal(true))"
-                >
-                  <div class="am-icon">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                      <polyline points="16 17 21 12 16 7" />
-                      <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                  </div>
-                  <div class="am-item-text" style="cursor: pointer">
-                    <div class="am-item-label">Đăng xuất</div>
-                  </div>
-                </div>
+            <!-- Hộp thông báo ẩn -->
+            <div id="notiDropdown" class="noti-dropdown">
+              <div class="noti-header">Thông báo mới</div>
+              <div class="noti-item">
+                <strong>Hệ thống VAULT</strong><br />
+                Ông đã xóa thành công huy hiệu ROOT màu mè. Trông đỡ chói mắt
+                hơn rồi đấy!
+                <div class="noti-time">Vừa xong</div>
               </div>
             </div>
           </div>
+
+          <div class="admin-avatar">A</div>
         </div>
       </header>
 
-      <!-- LEFT SIDEBAR -->
-      <aside class="sidebar" id="sidebar">
+      <!-- SIDEBAR -->
+      <aside class="admin-sidebar">
         <div class="sidebar-section">
-          <div class="sidebar-label">Thư mục</div>
-          <div
-            class="nav-item active"
-            data-tip="Tất cả file"
-            data-filter="all"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+          <div class="sidebar-label">Dashboard</div>
+          <nav class="sidebar-nav">
+            <a
+              href="#overview"
+              class="sidebar-item active"
+              onclick="showPage('overview')"
             >
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <span class="nav-item-text">Tất cả file</span>
-            <span class="badge" id="all_file">0</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Hình ảnh"
-            data-filter="img"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-            <span class="nav-item-text">Hình ảnh</span>
-            <span class="badge" id="hinh_anh">0</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Tài liệu"
-            data-filter="doc"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-              />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
-            <span class="nav-item-text">Tài liệu</span>
-            <span class="badge" id="tai_lieu">0</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Video"
-            data-filter="vid"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polygon points="23 7 16 12 23 17 23 7" />
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-            </svg>
-            <span class="nav-item-text">Video</span>
-            <span class="badge" id="video">0</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Chia sẻ"
-            data-filter="shared"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="18" cy="5" r="3" />
-              <circle cx="6" cy="12" r="3" />
-              <circle cx="18" cy="19" r="3" />
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-            </svg>
-            <span class="nav-item-text">Chia sẻ</span>
-            <span class="badge" id="chia_se">0</span>
-          </div>
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+              </div>
+              <span class="sidebar-text">Tổng quan</span>
+            </a>
+          </nav>
         </div>
-
-        <div class="sidebar-divider"></div>
 
         <div class="sidebar-section">
-          <div class="sidebar-label">Gần đây</div>
-          <div
-            class="nav-item"
-            data-tip="Hôm nay"
-            data-filter="today"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+          <div class="sidebar-label">Quản lý</div>
+          <nav class="sidebar-nav">
+            <a href="#users" class="sidebar-item" onclick="showPage('users')">
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <span class="sidebar-text">Người dùng</span>
+              <span class="sidebar-badge">847</span>
+            </a>
+
+            <a href="#files" class="sidebar-item" onclick="showPage('files')">
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path
+                    d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                  />
+                  <polyline points="13 2 13 9 20 9" />
+                </svg>
+              </div>
+              <span class="sidebar-text">Files Upload</span>
+              <span class="sidebar-badge success">1.2K</span>
+            </a>
+
+            <a
+              href="#blacklist"
+              class="sidebar-item"
+              onclick="showPage('blacklist')"
             >
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-            <span class="nav-item-text">Hôm nay</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Đã tải lên"
-            data-filter="all"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span class="nav-item-text">Đã tải lên</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Yêu thích"
-            data-filter="fav"
-            onclick="
-              setNav(this);
-              toggleFavoriteSelected();
-            "
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-              />
-            </svg>
-            <span class="nav-item-text">Yêu thích</span>
-          </div>
-          <div
-            class="nav-item"
-            data-tip="Thùng rác"
-            data-filter="trash"
-            onclick="setNav(this)"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="3 6 5 6 21 6" />
-              <path
-                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
-              />
-            </svg>
-            <span class="nav-item-text">Thùng rác</span>
-          </div>
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                </svg>
+              </div>
+              <span class="sidebar-text">Blacklist</span>
+              <span class="sidebar-badge">23</span>
+            </a>
+
+            <a href="#logs" class="sidebar-item" onclick="showPage('logs')">
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <span class="sidebar-text">Activity Logs</span>
+            </a>
+          </nav>
         </div>
 
-        <!-- Storage -->
-        <div class="storage-widget">
-          <div class="storage-header">
-            <span class="storage-label">Dung lượng</span>
-            <span class="storage-pct">68%</span>
-          </div>
-          <div class="storage-bar">
-            <div class="storage-fill" id="storFill"></div>
-          </div>
-          <div class="storage-info">
-            Đã dùng <strong>34.2 GB</strong> / 50 GB
-          </div>
-        </div>
-
-        <!-- Storage icon mini (hiện khi thu gọn) -->
-        <div
-          style="
-            padding: 10px 8px;
-            border-top: 1px solid var(--border);
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-          "
-        >
-          <div
-            style="
-              width: 36px;
-              height: 36px;
-              border-radius: 10px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: var(--ink-4);
-            "
-            title="Dung lượng: 68%"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        <div class="sidebar-section">
+          <div class="sidebar-label">Hệ thống</div>
+          <nav class="sidebar-nav">
+            <a
+              href="#monitor"
+              class="sidebar-item"
+              onclick="showPage('monitor')"
             >
-              <ellipse cx="12" cy="5" rx="9" ry="3" />
-              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-            </svg>
-          </div>
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <span class="sidebar-text">System Monitor</span>
+              <span class="sidebar-badge info">ON</span>
+            </a>
+
+            <a
+              href="#settings"
+              class="sidebar-item"
+              onclick="showPage('settings')"
+            >
+              <div class="sidebar-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  />
+                </svg>
+              </div>
+              <span class="sidebar-text">Cài đặt</span>
+            </a>
+          </nav>
         </div>
       </aside>
 
-      <!-- MAIN -->
-      <main class="main" id="main">
-        <!-- Toolbar -->
-        <div class="main-toolbar">
-          <div class="view-toggle">
-            <button
-              class="view-btn active"
-              id="gridBtn"
-              onclick="setView('grid')"
-              title="Lưới"
-            >
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
-            </button>
-            <button
-              class="view-btn"
-              id="listBtn"
-              onclick="setView('list')"
-              title="Danh sách"
-            >
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="8" y1="6" x2="21" y2="6" />
-                <line x1="8" y1="12" x2="21" y2="12" />
-                <line x1="8" y1="18" x2="21" y2="18" />
-                <line x1="3" y1="6" x2="3.01" y2="6" />
-                <line x1="3" y1="12" x2="3.01" y2="12" />
-                <line x1="3" y1="18" x2="3.01" y2="18" />
-              </svg>
-            </button>
-          </div>
-          <select class="sort-select" onchange="sortFiles(this.value)">
-            <option value="date-desc">Sắp xếp: Mới nhất</option>
-            <option value="name-asc">Sắp xếp: Tên A-Z</option>
-            <option value="size-desc">Sắp xếp: Kích thước</option>
-            <option value="type-asc">Sắp xếp: Loại file</option>
-          </select>
-          <div class="tool-sep"></div>
-          <span
-            style="
-              font-size: 12px;
-              color: var(--ink-4);
-              font-family: 'DM Mono', monospace;
-            "
-            id="selCount"
-          ></span>
-          <button
-            class="btn btn-ghost"
-            id="deleteSelBtn"
-            style="
-              display: none;
-              font-size: 12px;
-              padding: 5px 10px;
-              color: #c03030;
-              border-color: #e04040;
-            "
-            onclick="deleteSelected()"
-          >
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-            >
-              <polyline points="3 6 5 6 21 6" />
-              <path
-                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
-              />
-            </svg>
-            Xóa
-          </button>
-        </div>
-
-        <!-- Stats Cards -->
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
-            padding: 20px 24px 16px;
-            flex-shrink: 0;
-          "
-        >
-          <!-- Total Files -->
-          <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(10, 10, 10, 0.08)">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                />
-                <polyline points="14 2 14 8 20 8" />
-              </svg>
-            </div>
-            <div class="stat-info">
-              <div class="stat-label">Tổng số file</div>
-              <div class="stat-value" id="statTotal">0</div>
-            </div>
-          </div>
-          <!-- Images -->
-          <div class="stat-card">
-            <div
-              class="stat-icon"
-              style="background: rgba(255, 136, 0, 0.12); color: #ff8800"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <polyline points="21 15 16 10 5 21" />
-              </svg>
-            </div>
-            <div class="stat-info">
-              <div class="stat-label">Hình ảnh</div>
-              <div class="stat-value" id="statImg">0</div>
-            </div>
-          </div>
-          <!-- Documents -->
-          <div class="stat-card">
-            <div
-              class="stat-icon"
-              style="background: rgba(33, 115, 70, 0.12); color: #217346"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-              </svg>
-            </div>
-            <div class="stat-info">
-              <div class="stat-label">Tài liệu</div>
-              <div class="stat-value" id="statDoc">0</div>
-            </div>
-          </div>
-          <!-- Videos -->
-          <div class="stat-card">
-            <div
-              class="stat-icon"
-              style="background: rgba(43, 87, 154, 0.12); color: #2b579a"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polygon points="23 7 16 12 23 17 23 7" />
-                <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-              </svg>
-            </div>
-            <div class="stat-info">
-              <div class="stat-label">Video</div>
-              <div class="stat-value" id="statVid">0</div>
-            </div>
-          </div>
-          <!-- Others -->
-          <div class="stat-card">
-            <div
-              class="stat-icon"
-              style="background: rgba(102, 102, 102, 0.12); color: #666"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
-                />
-              </svg>
-            </div>
-            <div class="stat-info">
-              <div class="stat-label">Khác</div>
-              <div class="stat-value" id="statOther">0</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Files -->
-        <div class="files-area" id="filesArea">
-          <div class="section-title">Gần đây</div>
-          <div class="file-grid" id="fileContainer"></div>
-        </div>
+      <!-- MAIN CONTENT -->
+      <main class="admin-main" id="mainContent">
+        <!-- Content will be loaded here -->
       </main>
-
-      <!-- RIGHT PANEL -->
-      <aside class="panel" id="panel">
-        <!-- Icon rail (visible when collapsed) -->
-        <div class="panel-rail-icons">
-          <button
-            class="rail-icon-btn"
-            data-tip="Chi tiết"
-            onclick="toggleRight()"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-          </button>
-          <button
-            class="rail-icon-btn"
-            data-tip="Tải xuống"
-            onclick="downloadCurrentFile()"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </button>
-          <button
-            class="rail-icon-btn"
-            data-tip="Chia sẻ"
-            onclick="toast('Chọn file trước')"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="18" cy="5" r="3" />
-              <circle cx="6" cy="12" r="3" />
-              <circle cx="18" cy="19" r="3" />
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-            </svg>
-          </button>
-          <button
-            class="rail-icon-btn"
-            data-tip="Xóa"
-            onclick="deleteSelected()"
-            style="color: #c03030"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="3 6 5 6 21 6" />
-              <path
-                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Full panel content (visible when open) -->
-        <div class="panel-full">
-          <div class="panel-header">
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-              "
-            >
-              <div>
-                <div class="panel-title" id="panelTitle">Chi tiết file</div>
-                <div class="panel-sub" id="panelSub">Chọn một file để xem</div>
-              </div>
-              <!-- Close button -->
-              <button
-                onclick="toggleRight()"
-                style="
-                  background: none;
-                  border: none;
-                  cursor: pointer;
-                  padding: 6px;
-                  border-radius: 8px;
-                  color: var(--ink-4);
-                  display: flex;
-                  align-items: center;
-                  transition: all 0.15s;
-                "
-                onmouseover="
-                  this.style.background = 'var(--bg)';
-                  this.style.color = 'var(--ink)';
-                "
-                onmouseout="
-                  this.style.background = 'none';
-                  this.style.color = 'var(--ink-4)';
-                "
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="panel-empty" id="panelEmpty">
-            <div class="panel-empty-icon">
-              <svg
-                width="52"
-                height="52"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                />
-                <polyline points="14 2 14 8 20 8" />
-              </svg>
-            </div>
-            <div class="panel-empty-title">Chưa chọn file</div>
-            <div class="panel-empty-sub">
-              Nhấn vào một file bất kỳ để xem thông tin chi tiết
-            </div>
-          </div>
-          <div class="preview-area" id="panelContent" style="display: none">
-            <div class="preview-thumb" id="previewThumb"></div>
-            <div class="detail-group">
-              <div class="detail-label">Thông tin</div>
-              <div class="detail-row">
-                <span class="detail-key">Tên</span
-                ><span class="detail-val" id="detName">—</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-key">Loại</span
-                ><span class="detail-val" id="detType">—</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-key">Kích thước</span
-                ><span class="detail-val" id="detSize">—</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-key" id="detDateLabel">Ngày tải</span
-                ><span class="detail-val" id="detDate">—</span>
-              </div>
-              <div class="detail-row">
-                <span class="detail-key">Độ phân giải</span
-                ><span class="detail-val" id="detRes">—</span>
-              </div>
-            </div>
-            <div class="detail-group">
-              <div class="detail-label">Đường dẫn</div>
-              <div class="detail-row">
-                <span
-                  class="detail-val"
-                  id="detPath"
-                  style="font-size: 11px; word-break: break-all"
-                  >—</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="panel-actions" id="panelActions" style="display: none">
-            <!-- Nút Yêu thích (luôn hiện ở mọi mode) -->
-            <button
-              class="panel-btn favorite-panel"
-              id="favoritePanelBtn"
-              onclick="toggleFavorite()"
-            >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                />
-              </svg>
-              <span id="favoritePanelText">Yêu thích</span>
-            </button>
-            <div id="normalActions">
-              <button class="panel-btn" onclick="downloadCurrentFile()">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Tải xuống
-              </button>
-
-              <button class="panel-btn" onclick="shareFile()">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="18" cy="5" r="3" />
-                  <circle cx="6" cy="12" r="3" />
-                  <circle cx="18" cy="19" r="3" />
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-                </svg>
-                Chia sẻ
-              </button>
-
-              <button class="panel-btn danger" onclick="deleteSelected()">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="3 6 5 6 21 6" />
-                  <path
-                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
-                  />
-                </svg>
-                Xóa file
-              </button>
-            </div>
-            <div id="trashActions" style="display: none">
-              <button class="panel-btn restore" onclick="restoreFile()">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="1 4 1 10 7 10" />
-                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-                </svg>
-                Khôi phục file
-              </button>
-
-              <button class="panel-btn danger" onclick="permanentDelete()">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-                Xóa vĩnh viễn
-              </button>
-            </div>
-          </div>
-        </div>
-      </aside>
     </div>
 
-    <!-- (triggers removed — sidebar now uses icon-rail) -->
-
-    <!-- UPLOAD MODAL -->
-    <div class="upload-modal" id="uploadModal">
-      <div class="upload-modal-box">
-        <div class="modal-title">Tải file lên</div>
-        <div class="modal-sub">
-          Hỗ trợ JPG, PNG, PDF, MP4, ZIP và nhiều định dạng khác
-        </div>
-        <div
-          class="modal-dropzone"
-          onclick="document.getElementById('fileInput').click()"
-        >
-          <svg
-            width="38"
-            height="38"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-          <div class="modal-dropzone-title">Kéo & thả hoặc nhấn để chọn</div>
-          <div class="modal-dropzone-sub">Tối đa 2GB mỗi file</div>
-        </div>
-        <input
-          type="file"
-          id="fileInput"
-          class="modal-file-input"
-          multiple
-          onchange="handleFiles(this.files)"
-        />
-        <div class="upload-queue" id="uploadQueue"></div>
-        <div class="modal-actions">
-          <button class="btn btn-ghost" onclick="closeModal()">Hủy</button>
-          <button class="btn btn-primary" onclick="startUpload()">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-            Upload ngay
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="logoutModal"
-      style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(4px);
-        z-index: 10000; /* Cho số thật lớn để không bị cái gì đè lên */
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div
-        style="
-          background: #fff;
-          padding: 25px;
-          border-radius: 15px;
-          box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-          text-align: center;
-          width: 300px;
-          font-family: sans-serif;
-        "
-      >
-        <h3 style="margin: 0; color: #000">Xác nhận</h3>
-        <p style="color: #444; margin: 15px 0">Ông có chắc muốn thoát không?</p>
-
-        <div style="display: flex; gap: 10px">
-          <button
-            onclick="toggleLogoutModal(false)"
-            style="
-              flex: 1;
-              padding: 10px;
-              border-radius: 8px;
-              border: 1px solid #000;
-              background: #fff;
-              cursor: pointer;
-            "
-          >
-            Hủy
-          </button>
-          <button
-            onclick="confirmLogout()"
-            style="
-              flex: 1;
-              padding: 10px;
-              border-radius: 8px;
-              border: none;
-              background: #000;
-              color: #fff;
-              cursor: pointer;
-            "
-          >
-            Đăng xuất
-          </button>
-        </div>
-      </div>
-    </div>
-    <!-- SHARE MODAL -->
-    <div class="share-modal-overlay" id="shareModalOverlay">
-      <div class="share-modal">
-        <!-- Header -->
-        <div class="share-header">
-          <div class="share-header-left">
-            <div class="share-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <circle cx="18" cy="5" r="3" />
-                <circle cx="6" cy="12" r="3" />
-                <circle cx="18" cy="19" r="3" />
-                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-              </svg>
-            </div>
-            <div class="share-title-wrap">
-              <h3>Chia sẻ file</h3>
-              <p id="shareFileName">document.pdf</p>
-            </div>
-          </div>
-          <button class="share-close" onclick="closeShareModal()">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Content -->
-        <div class="share-content">
-          <!-- Link Section -->
-          <div class="share-section">
-            <div class="share-section-label">Link chia sẻ</div>
-            <div class="share-link-box">
-              <input
-                type="text"
-                class="share-link-input"
-                id="shareLinkInput"
-                readonly
-                value="https://vault.com/share/abc123"
-              />
-              <button class="share-copy-btn" onclick="copyShareLink()">
-                Copy
-              </button>
-            </div>
-            <div class="share-info-box">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="16" x2="12" y2="12" />
-                <line x1="12" y1="8" x2="12.01" y2="8" />
-              </svg>
-              <div>
-                Link này cho phép người khác xem và tải file của bạn. Bạn có thể
-                thu hồi quyền truy cập bất cứ lúc nào.
-              </div>
-            </div>
-          </div>
-
-          <!-- Social Share -->
-          <div class="share-section">
-            <div class="share-section-label">Chia sẻ qua</div>
-            <div class="share-social-grid">
-              <a
-                href="#"
-                class="share-social-btn"
-                onclick="
-                  shareToFacebook();
-                  return false;
-                "
-              >
-                <div class="share-social-icon facebook">📘</div>
-                <div class="share-social-label">Facebook</div>
-              </a>
-
-              <a
-                href="#"
-                class="share-social-btn"
-                onclick="
-                  shareToTwitter();
-                  return false;
-                "
-              >
-                <div class="share-social-icon twitter">🐦</div>
-                <div class="share-social-label">Twitter</div>
-              </a>
-
-              <a
-                href="#"
-                class="share-social-btn"
-                onclick="
-                  shareToEmail();
-                  return false;
-                "
-              >
-                <div class="share-social-icon email">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                    />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
-                </div>
-                <div class="share-social-label">Email</div>
-              </a>
-
-              <a
-                href="#"
-                class="share-social-btn"
-                onclick="
-                  shareToWhatsApp();
-                  return false;
-                "
-              >
-                <div class="share-social-icon whatsapp">💬</div>
-                <div class="share-social-label">WhatsApp</div>
-              </a>
-
-              <a
-                href="#"
-                class="share-social-btn"
-                onclick="
-                  shareToTelegram();
-                  return false;
-                "
-              >
-                <div class="share-social-icon telegram">✈️</div>
-                <div class="share-social-label">Telegram</div>
-              </a>
-            </div>
-          </div>
-
-          <!-- HTML File Access (Only for .html files) -->
-          <div
-            class="share-section"
-            id="htmlAccessSection"
-            style="display: none"
-          >
-            <div class="share-section-label">Truy cập trực tiếp (HTML)</div>
-
-            <div class="html-access-card">
-              <div class="html-access-header">
-                <div class="html-access-info">
-                  <div class="html-access-icon">🌐</div>
-                  <div class="html-access-text">
-                    <h4>Chế độ truy cập</h4>
-                    <p>Cho phép xem file HTML trực tiếp</p>
-                  </div>
-                </div>
-
-                <!-- Privacy Toggle -->
-                <div
-                  class="privacy-toggle"
-                  id="privacyToggle"
-                  onclick="togglePrivacy()"
-                ></div>
-              </div>
-
-              <!-- Privacy Label -->
-              <div class="privacy-label private" id="privacyLabel">
-                <div class="privacy-label-text">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                  <span id="privacyLabelText">Riêng tư</span>
-                </div>
-                <div class="privacy-badge" id="privacyBadge">PRIVATE</div>
-              </div>
-
-              <!-- Access Button -->
-              <button class="html-access-btn" onclick="openHTMLPreview()">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                  />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Mở file HTML
-              </button>
-            </div>
-
-            <div class="share-info-box">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                />
-                <line x1="12" y1="9" x2="12" y2="13" />
-                <line x1="12" y1="17" x2="12.01" y2="17" />
-              </svg>
-              <div>
-                <strong>Riêng tư:</strong> Chỉ bạn và người có link mới xem
-                được.<br />
-                <strong>Công khai:</strong> Ai cũng có thể tìm thấy qua search
-                engines.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- TOAST -->
-    <div class="toast-stack" id="toasts"></div>
+    <div class="toast" id="toast"></div>
 
-    <script
-      data-cfasync="false"
-      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-    ></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/get_location.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/dat_lai_dung_luong.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/storage-mag.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/img_preview.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/help_model.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/right_click.js"></script>
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/setting_model.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/thong_bao_xac_nhan_dang_xuat.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/group_password/effect/input_pass_effect/canh_bao_dep.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/thay_doi_quyen_han.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/thay_title.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/thay_ten_nguoi_dung.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/main_dboard.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/sap_xep_file.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/darkmode.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/menu_ac.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/notif.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/effect/get_email.js"></script>
-    <script src="https://cdn.statically.io/gh//gemini-dot/learnpythonserver-sm@main/frontend/javascript/upload/dashboard/chuc_nang/share_model.js"></script>
+    <script>
+      // ═══════════════════════════════════════════════════════════════
+      // SAMPLE DATA
+      // ═══════════════════════════════════════════════════════════════
+
+      const usersData = [
+        {
+          id: 1,
+          name: 'Nguyễn Văn A',
+          email: 'nguyenvana@example.com',
+          role: 'admin',
+          status: 'active',
+          files: 45,
+          storage: '2.3 GB',
+          joined: '2026-01-15',
+          lastActive: '5 phút trước',
+        },
+        {
+          id: 2,
+          name: 'Trần Thị B',
+          email: 'tranthib@example.com',
+          role: 'premium',
+          status: 'active',
+          files: 128,
+          storage: '8.5 GB',
+          joined: '2026-02-20',
+          lastActive: '2 giờ trước',
+        },
+        {
+          id: 3,
+          name: 'Lê Văn C',
+          email: 'levanc@example.com',
+          role: 'free',
+          status: 'active',
+          files: 12,
+          storage: '450 MB',
+          joined: '2026-03-10',
+          lastActive: '1 ngày trước',
+        },
+        {
+          id: 4,
+          name: 'Phạm Thị D',
+          email: 'phamthid@example.com',
+          role: 'premium',
+          status: 'suspended',
+          files: 0,
+          storage: '0 B',
+          joined: '2025-12-05',
+          lastActive: '15 ngày trước',
+        },
+        {
+          id: 5,
+          name: 'Hoàng Văn E',
+          email: 'hoangvane@example.com',
+          role: 'free',
+          status: 'active',
+          files: 8,
+          storage: '230 MB',
+          joined: '2026-03-12',
+          lastActive: '3 giờ trước',
+        },
+      ];
+
+      const blacklistData = [
+        {
+          id: 1,
+          type: 'user',
+          target: 'spammer@evil.com',
+          reason: 'Spam liên tục',
+          date: '2026-03-10',
+          by: 'Admin A',
+        },
+        {
+          id: 2,
+          type: 'ip',
+          target: '192.168.1.100',
+          reason: 'Tấn công DDoS',
+          date: '2026-03-11',
+          by: 'Admin Root',
+        },
+        {
+          id: 3,
+          type: 'user',
+          target: 'hacker123@dark.net',
+          reason: 'Phát tán malware',
+          date: '2026-03-12',
+          by: 'Moderator B',
+        },
+      ];
+
+      const logsData = [
+        {
+          id: 1,
+          user: 'Nguyễn Văn A',
+          action: 'Tải lên file',
+          detail: 'document.pdf (2.5MB)',
+          ip: '192.168.1.50',
+          time: '2026-03-14 10:30:15',
+        },
+        {
+          id: 2,
+          user: 'Trần Thị B',
+          action: 'Xóa file',
+          detail: 'old_photo.jpg',
+          ip: '192.168.1.51',
+          time: '2026-03-14 10:28:42',
+        },
+        {
+          id: 3,
+          user: 'Admin Root',
+          action: 'Khóa tài khoản',
+          detail: 'User ID: 45',
+          ip: '192.168.1.1',
+          time: '2026-03-14 10:25:10',
+        },
+        {
+          id: 4,
+          user: 'Lê Văn C',
+          action: 'Đăng nhập',
+          detail: 'Thành công',
+          ip: '192.168.1.52',
+          time: '2026-03-14 10:20:05',
+        },
+        {
+          id: 5,
+          user: 'System',
+          action: 'Backup tự động',
+          detail: 'Database backup completed',
+          ip: 'localhost',
+          time: '2026-03-14 03:00:00',
+        },
+      ];
+
+      // ═══════════════════════════════════════════════════════════════
+      // PAGE RENDERING
+      // ═══════════════════════════════════════════════════════════════
+
+      function showPage(page) {
+        // Update sidebar active state
+        document.querySelectorAll('.sidebar-item').forEach((item) => {
+          item.classList.remove('active');
+          if (item.getAttribute('onclick').includes(page)) {
+            item.classList.add('active');
+          }
+        });
+
+        // Render page content
+        const content = document.getElementById('mainContent');
+
+        switch (page) {
+          case 'overview':
+            content.innerHTML = renderOverviewPage();
+            initCharts();
+            break;
+          case 'users':
+            content.innerHTML = renderUsersPage();
+            break;
+          case 'files':
+            content.innerHTML = renderFilesPage();
+            break;
+          case 'blacklist':
+            content.innerHTML = renderBlacklistPage();
+            break;
+          case 'logs':
+            content.innerHTML = renderLogsPage();
+            break;
+          case 'monitor':
+            content.innerHTML = renderMonitorPage();
+            updateSystemStats();
+            break;
+          case 'settings':
+            content.innerHTML = renderSettingsPage();
+            break;
+          default:
+            content.innerHTML = renderOverviewPage();
+        }
+      }
+
+      // ═══ OVERVIEW PAGE ═══
+      function renderOverviewPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Tổng quan hệ thống</h1>
+          <p class="page-subtitle">Thống kê và giám sát VAULT Admin Dashboard</p>
+        </div>
+
+        <!-- STATS GRID -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div class="stat-trend up">+12%</div>
+            </div>
+            <div class="stat-value">847</div>
+            <div class="stat-label">Tổng người dùng</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                  <polyline points="13 2 13 9 20 9"/>
+                </svg>
+              </div>
+              <div class="stat-trend up">+8%</div>
+            </div>
+            <div class="stat-value">1.2K</div>
+            <div class="stat-label">Tổng files</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                </svg>
+              </div>
+              <div class="stat-trend down">-3%</div>
+            </div>
+            <div class="stat-value">342GB</div>
+            <div class="stat-label">Storage sử dụng</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+              <div class="stat-trend up">+24%</div>
+            </div>
+            <div class="stat-value">95%</div>
+            <div class="stat-label">Uptime hệ thống</div>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="chart-container">
+          <h3 style="margin-bottom:20px;">Biểu đồ tăng trưởng người dùng</h3>
+          <div class="chart-placeholder" id="userChart">
+            Biểu đồ đang được tải...
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h3 style="margin-bottom:20px;">Storage theo thời gian</h3>
+          <div class="chart-placeholder" id="storageChart">
+            Biểu đồ đang được tải...
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ USERS PAGE ═══
+      function renderUsersPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Quản lý người dùng</h1>
+          <p class="page-subtitle">Danh sách, phân quyền và giám sát người dùng hệ thống</p>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="addUser()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Thêm người dùng
+            </button>
+            <button class="btn btn-ghost" onclick="exportUsers()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">
+              Danh sách người dùng (${usersData.length})
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-small btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <line x1="4" y1="21" x2="4" y2="14"/>
+                  <line x1="4" y1="10" x2="4" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12" y2="3"/>
+                  <line x1="20" y1="21" x2="20" y2="16"/>
+                  <line x1="20" y1="12" x2="20" y2="3"/>
+                </svg>
+                Filter
+              </button>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Người dùng</th>
+                  <th>Email</th>
+                  <th>Vai trò</th>
+                  <th>Files</th>
+                  <th>Storage</th>
+                  <th>Trạng thái</th>
+                  <th>Hoạt động</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${usersData
+                  .map(
+                    (user) => `
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar">${user.name.charAt(0)}</div>
+                        <div class="user-info">
+                          <div class="user-name">${user.name}</div>
+                          <div class="user-email">${user.email}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>${user.email}</td>
+                    <td>
+                      ${
+                        user.role === 'admin'
+                          ? '<span class="badge admin">ADMIN</span>'
+                          : user.role === 'premium'
+                            ? '<span class="badge warning">PREMIUM</span>'
+                            : '<span class="badge">FREE</span>'
+                      }
+                    </td>
+                    <td>${user.files}</td>
+                    <td>${user.storage}</td>
+                    <td>
+                      <span class="badge ${user.status === 'active' ? 'success' : 'danger'}">
+                        ${user.status === 'active' ? 'Active' : 'Suspended'}
+                      </span>
+                    </td>
+                    <td>${user.lastActive}</td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn" onclick="editUser(${user.id})" title="Chỉnh sửa">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                          </svg>
+                        </button>
+                        <button class="action-btn" onclick="viewUserLogs(${user.id})" title="Logs">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                          </svg>
+                        </button>
+                        <button class="action-btn danger" onclick="deleteUser(${user.id})" title="Xóa">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ FILES PAGE ═══
+      function renderFilesPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Quản lý Files Upload</h1>
+          <p class="page-subtitle">Giám sát và quản lý tất cả files được upload lên hệ thống</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">📄</div>
+              <div class="stat-trend up">+15%</div>
+            </div>
+            <div class="stat-value">1,247</div>
+            <div class="stat-label">Tổng files</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">🖼️</div>
+            </div>
+            <div class="stat-value">856</div>
+            <div class="stat-label">Hình ảnh</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">📝</div>
+            </div>
+            <div class="stat-value">234</div>
+            <div class="stat-label">Tài liệu</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">🎥</div>
+            </div>
+            <div class="stat-value">157</div>
+            <div class="stat-label">Video</div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Files gần đây</div>
+            <div class="card-actions">
+              <button class="btn btn-small btn-ghost">Xem tất cả</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--ink-3);">
+              Tích hợp với VAULT Upload System. Xem file chi tiết tại 
+              <a href="/dashboard.html" style="color: var(--ink); font-weight: 600;">Dashboard chính</a>
+            </p>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ BLACKLIST PAGE ═══
+      function renderBlacklistPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Blacklist Management</h1>
+          <p class="page-subtitle">Quản lý danh sách chặn người dùng và IP</p>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="addBlacklist()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+              </svg>
+              Thêm vào Blacklist
+            </button>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Danh sách bị chặn (${blacklistData.length})</div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Loại</th>
+                  <th>Mục tiêu</th>
+                  <th>Lý do</th>
+                  <th>Ngày chặn</th>
+                  <th>Bởi</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${blacklistData
+                  .map(
+                    (item) => `
+                  <tr>
+                    <td>
+                      <span class="badge ${item.type === 'ip' ? 'warning' : 'danger'}">
+                        ${item.type.toUpperCase()}
+                      </span>
+                    </td>
+                    <td style="font-family: 'DM Mono', monospace;">${item.target}</td>
+                    <td>${item.reason}</td>
+                    <td>${item.date}</td>
+                    <td>${item.by}</td>
+                    <td>
+                      <div class="table-actions">
+                        <button class="action-btn" onclick="editBlacklist(${item.id})">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                          </svg>
+                        </button>
+                        <button class="action-btn" onclick="removeBlacklist(${item.id})">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="20 6 9 17 4 12"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ LOGS PAGE ═══
+      function renderLogsPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Activity Logs</h1>
+          <p class="page-subtitle">Theo dõi mọi hoạt động trên hệ thống</p>
+          <div class="page-actions">
+            <button class="btn btn-ghost" onclick="exportLogs()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export Logs
+            </button>
+            <button class="btn btn-ghost" onclick="clearOldLogs()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+              </svg>
+              Xóa logs cũ
+            </button>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Hoạt động gần đây</div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Người dùng</th>
+                  <th>Hành động</th>
+                  <th>Chi tiết</th>
+                  <th>IP Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${logsData
+                  .map(
+                    (log) => `
+                  <tr>
+                    <td style="font-family: 'DM Mono', monospace;">${log.time}</td>
+                    <td>${log.user}</td>
+                    <td><span class="badge info">${log.action}</span></td>
+                    <td>${log.detail}</td>
+                    <td style="font-family: 'DM Mono', monospace;">${log.ip}</td>
+                  </tr>
+                `
+                  )
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ MONITOR PAGE ═══
+      function renderMonitorPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">System Monitor</h1>
+          <p class="page-subtitle">Giám sát hiệu suất server Ubuntu</p>
+        </div>
+
+        <div class="monitor-grid">
+          <div class="monitor-card">
+            <div class="monitor-header">
+              <div class="monitor-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width: 20px; height: 20px;">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                CPU Usage
+              </div>
+              <span id="cpuValue" class="badge info">0%</span>
+            </div>
+            <div class="monitor-value" id="cpuPercent">0%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="cpuProgress" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="monitor-card">
+            <div class="monitor-header">
+              <div class="monitor-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width: 20px; height: 20px;">
+                  <path d="M20 7h-9"/>
+                  <path d="M14 17H5"/>
+                  <circle cx="17" cy="17" r="3"/>
+                  <circle cx="7" cy="7" r="3"/>
+                </svg>
+                RAM Usage
+              </div>
+              <span id="ramValue" class="badge info">0%</span>
+            </div>
+            <div class="monitor-value" id="ramPercent">0%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="ramProgress" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="monitor-card">
+            <div class="monitor-header">
+              <div class="monitor-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width: 20px; height: 20px;">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                </svg>
+                Disk Usage
+              </div>
+              <span id="diskValue" class="badge info">0%</span>
+            </div>
+            <div class="monitor-value" id="diskPercent">0%</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="diskProgress" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Server Information</div>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+              <div>
+                <div style="font-size: 13px; color: var(--ink-4); margin-bottom: 4px;">OS</div>
+                <div style="font-weight: 600;">Ubuntu 24.04 LTS</div>
+              </div>
+              <div>
+                <div style="font-size: 13px; color: var(--ink-4); margin-bottom: 4px;">Kernel</div>
+                <div style="font-weight: 600; font-family: 'DM Mono', monospace;">6.8.0-45-generic</div>
+              </div>
+              <div>
+                <div style="font-size: 13px; color: var(--ink-4); margin-bottom: 4px;">Uptime</div>
+                <div style="font-weight: 600;">15 days 8h 42m</div>
+              </div>
+              <div>
+                <div style="font-size: 13px; color: var(--ink-4); margin-bottom: 4px;">Load Average</div>
+                <div style="font-weight: 600; font-family: 'DM Mono', monospace;">1.24, 1.18, 1.05</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══ SETTINGS PAGE ═══
+      function renderSettingsPage() {
+        return `
+        <div class="page-header">
+          <h1 class="page-title">Cài đặt hệ thống</h1>
+          <p class="page-subtitle">Cấu hình và quản lý hệ thống VAULT</p>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Chế độ bảo trì</div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">
+                <input type="checkbox" id="maintenanceMode"> 
+                Bật chế độ bảo trì (người dùng không thể truy cập)
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Thông báo bảo trì</label>
+              <textarea class="form-textarea" placeholder="Hệ thống đang bảo trì...">Hệ thống đang được nâng cấp. Vui lòng quay lại sau 30 phút.</textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveMaintenanceSettings()">Lưu cài đặt</button>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Email Configuration</div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">SMTP Server</label>
+              <input type="text" class="form-input" value="smtp.gmail.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP Port</label>
+              <input type="number" class="form-input" value="587">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email gửi đi</label>
+              <input type="email" class="form-input" value="noreply@vault.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">SMTP Password</label>
+              <input type="password" class="form-input" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary" onclick="saveEmailSettings()">Lưu cài đặt</button>
+            <button class="btn btn-ghost" onclick="testEmail()">Test Email</button>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="card-header">
+            <div class="card-title">Upload Settings</div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Kích thước file tối đa (MB)</label>
+              <input type="number" class="form-input" value="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Loại file cho phép</label>
+              <input type="text" class="form-input" value="jpg, png, pdf, docx, xlsx">
+            </div>
+            <button class="btn btn-primary" onclick="saveUploadSettings()">Lưu cài đặt</button>
+          </div>
+        </div>
+      `;
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // ACTIONS
+      // ═══════════════════════════════════════════════════════════════
+
+      function addUser() {
+        toast('Mở form thêm người dùng mới');
+      }
+
+      function editUser(id) {
+        toast(`Chỉnh sửa user ID: ${id}`);
+      }
+
+      function deleteUser(id) {
+        if (confirm('Xóa người dùng này?')) {
+          toast('Đã xóa người dùng');
+        }
+      }
+
+      function viewUserLogs(id) {
+        toast(`Xem logs của user ID: ${id}`);
+        showPage('logs');
+      }
+
+      function exportUsers() {
+        toast('Đang export CSV...');
+      }
+
+      function addBlacklist() {
+        toast('Thêm vào blacklist');
+      }
+
+      function editBlacklist(id) {
+        toast(`Chỉnh sửa blacklist ID: ${id}`);
+      }
+
+      function removeBlacklist(id) {
+        if (confirm('Gỡ khỏi blacklist?')) {
+          toast('Đã gỡ khỏi blacklist');
+        }
+      }
+
+      function exportLogs() {
+        toast('Đang export logs...');
+      }
+
+      function clearOldLogs() {
+        if (confirm('Xóa logs cũ hơn 30 ngày?')) {
+          toast('Đã xóa logs cũ');
+        }
+      }
+
+      function saveMaintenanceSettings() {
+        toast('✓ Đã lưu cài đặt bảo trì');
+      }
+
+      function saveEmailSettings() {
+        toast('✓ Đã lưu cài đặt email');
+      }
+
+      function testEmail() {
+        toast('📧 Đang gửi email test...');
+      }
+
+      function saveUploadSettings() {
+        toast('✓ Đã lưu cài đặt upload');
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // SYSTEM MONITOR
+      // ═══════════════════════════════════════════════════════════════
+
+      function updateSystemStats() {
+        // Simulate system stats (replace with real API call)
+        setInterval(() => {
+          const cpu = Math.floor(Math.random() * 40) + 30; // 30-70%
+          const ram = Math.floor(Math.random() * 30) + 50; // 50-80%
+          const disk = Math.floor(Math.random() * 20) + 60; // 60-80%
+
+          document.getElementById('cpuPercent').textContent = cpu + '%';
+          document.getElementById('cpuValue').textContent = cpu + '%';
+          document.getElementById('cpuProgress').style.width = cpu + '%';
+
+          document.getElementById('ramPercent').textContent = ram + '%';
+          document.getElementById('ramValue').textContent = ram + '%';
+          document.getElementById('ramProgress').style.width = ram + '%';
+
+          document.getElementById('diskPercent').textContent = disk + '%';
+          document.getElementById('diskValue').textContent = disk + '%';
+          document.getElementById('diskProgress').style.width = disk + '%';
+        }, 2000);
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // CHARTS
+      // ═══════════════════════════════════════════════════════════════
+
+      function initCharts() {
+        // Placeholder for charts (use Chart.js or similar)
+        setTimeout(() => {
+          document.getElementById('userChart').textContent =
+            'Biểu đồ tăng trưởng người dùng (Tích hợp Chart.js)';
+          document.getElementById('storageChart').textContent =
+            'Biểu đồ storage (Tích hợp Chart.js)';
+        }, 500);
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // TOAST
+      // ═══════════════════════════════════════════════════════════════
+
+      function toast(message) {
+        const toastEl = document.getElementById('toast');
+        toastEl.textContent = message;
+        toastEl.classList.add('show');
+        setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, 3000);
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // INIT
+      // ═══════════════════════════════════════════════════════════════
+
+      document.addEventListener('DOMContentLoaded', function () {
+        showPage('overview');
+        console.log('[VAULT Admin Dashboard] Loaded');
+      });
+      // Hàm bật/tắt bảng thông báo
+      function toggleNotifications(event) {
+        event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+        const dropdown = document.getElementById('notiDropdown');
+        const badge = document.getElementById('notiBadge');
+
+        // Bật hoặc tắt class 'show'
+        dropdown.classList.toggle('show');
+
+        // Ẩn cái số 1 đi vì mình đã ấn vào xem rồi
+        if (badge) {
+          badge.style.display = 'none';
+        }
+      }
+
+      // Bấm ra ngoài khoảng trống thì tự động đóng bảng thông báo
+      window.onclick = function (event) {
+        const dropdown = document.getElementById('notiDropdown');
+        if (dropdown.classList.contains('show')) {
+          dropdown.classList.remove('show');
+        }
+      };
+    </script>
   </body>
 </html>
